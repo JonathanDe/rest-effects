@@ -1,34 +1,34 @@
 import { Usuario } from 'src/app/models/usuario.model';
-import * as fromUsuarios from '../actions';
+import * as fromUsuario from '../actions';
 
-export interface UsuarioState {
-  users: Usuario[];
+export interface SingleUserState {
+  user: Usuario;
   loaded: boolean;
   loading: boolean;
   error: any;
 }
 
-const initialState: UsuarioState = {
-  users: [],
+const initialState: SingleUserState = {
+  user: null,
   loaded: false,
   loading: false,
   error: null,
 };
 
-export function usuariosReducer(
+export function usuarioReducer(
   state = initialState,
-  action: fromUsuarios.acciones,
-): UsuarioState {
+  action: fromUsuario.usuarioAcciones,
+): SingleUserState {
   switch (action.type) {
 
-    case fromUsuarios.CARGAR_USUARIOS:
+    case fromUsuario.CARGAR_USUARIO:
       return {
         ...state,
         loading: true,
         error: null
       };
 
-    case fromUsuarios.CARGAR_USUARIOS_FAIL:
+    case fromUsuario.CARGAR_USUARIO_FAIL:
       return {
         ...state,
         loaded: false,
@@ -40,12 +40,12 @@ export function usuariosReducer(
         }
       };
 
-    case fromUsuarios.CARGAR_USUARIOS_SUCCESS:
+    case fromUsuario.CARGAR_USUARIO_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
-        users: [...action.usuarios]
+        user: {...action.usuario}
       };
 
     default:

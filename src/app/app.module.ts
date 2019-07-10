@@ -9,9 +9,11 @@ import { SharedModule } from './shared/shared.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 import { appReducers } from './store/app.reducer';
 import { environment } from '../environments/environment';
+import { effectsArr } from './store/effects';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { environment } from '../environments/environment';
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
-    })
+    }),
+    EffectsModule.forRoot(effectsArr)
   ],
   providers: [],
   bootstrap: [AppComponent]
